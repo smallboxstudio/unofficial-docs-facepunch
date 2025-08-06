@@ -915,16 +915,20 @@
 <p><code>GET /sbox/package/get/smallboxstudio.spongebobkrustykrab</code></p>
 <hr />
 <h2 id="exemple-de-reponse">Exemple de Réponse</h2>
-<pre><code class="language-json">{
-  &quot;Org&quot;: {
+<pre><code class="language-json">&quot;Org&quot;: {
     &quot;Ident&quot;: &quot;smallboxstudio&quot;,
     &quot;Title&quot;: &quot;Small Box Studio&quot;,
-    &quot;Description&quot;: &quot;Team Small Box Studio&quot;
+    &quot;Description&quot;: &quot;Team Small Box Studio&quot;,
+    &quot;Thumb&quot;: &quot;https://cdn.sbox.game/org/smallboxstudio/logo.7256b703-3987-41c5-8355-397782256ea4.png&quot;,
+    &quot;Discord&quot;: &quot;https://discord.gg/ucvM2sfTBP&quot;
   },
   &quot;Ident&quot;: &quot;spongebobkrustykrab&quot;,
   &quot;Title&quot;: &quot;Sponge Bob Krusty Krab&quot;,
   &quot;Summary&quot;: &quot;Ohhhh, who lives in a pineapple under the sea ?&quot;,
-  &quot;TypeName&quot;: &quot;map&quot;,
+  &quot;Description&quot;: &quot;&lt;div&gt;&lt;!--block--&gt;Discord : &lt;a href=\&quot;https://discord.gg/UbKbayChqj\&quot;&gt;https://discord.gg/UbKbayChqj&lt;/a&gt;&lt;/div&gt;&quot;,
+  &quot;Thumb&quot;: &quot;https://cdn.sbox.game/org/smallboxstudio/spongebobkrustykrab/thumb/1418c92c-de45-4b28-8002-7a52e1974827.png&quot;,
+  &quot;ThumbWide&quot;: &quot;https://cdn.sbox.game/org/smallboxstudio/spongebobkrustykrab/thumb/4079eac1-d49d-4761-aedc-4c27dbdc92b5.png&quot;,
+  &quot;ThumbTall&quot;: &quot;https://cdn.sbox.game/org/smallboxstudio/spongebobkrustykrab/thumb/1418c92c-de45-4b28-8002-7a52e1974827.png&quot;,
   &quot;Updated&quot;: &quot;2025-07-21T22:47:50.3+00:00&quot;,
   &quot;Created&quot;: &quot;2025-06-08T14:06:13.7+00:00&quot;,
   &quot;UsageStats&quot;: {
@@ -932,11 +936,72 @@
       &quot;Users&quot;: 1667,
       &quot;Seconds&quot;: 701148,
       &quot;Sessions&quot;: 1999
-    }
+    },
+    &quot;Month&quot;: {
+      &quot;Users&quot;: 1666,
+      &quot;Seconds&quot;: 700996
+    },
+    &quot;Week&quot;: {
+      &quot;Users&quot;: 1666,
+      &quot;Seconds&quot;: 700996
+    },
+    &quot;Day&quot;: {
+      &quot;Users&quot;: 1666,
+      &quot;Seconds&quot;: 700996
+    },
+    &quot;UsersNow&quot;: 7,
+    &quot;Trend&quot;: 1.93159413337708
   },
+  &quot;ReviewStats&quot;: {
+    &quot;Scores&quot;: [
+      {
+        &quot;Rating&quot;: 2,
+        &quot;Total&quot;: 2
+      }
+    ]
+  },
+  &quot;Tags&quot;: [
+    &quot;bob&quot;,
+    &quot;hunt&quot;,
+    &quot;krab&quot;,
+    &quot;krusty&quot;,
+    &quot;map&quot;,
+    &quot;ph&quot;,
+    &quot;prop&quot;,
+    &quot;prophunt&quot;,
+    &quot;props&quot;,
+    &quot;sponge&quot;
+  ],
   &quot;Favourited&quot;: 15,
   &quot;VotesUp&quot;: 10,
-  &quot;Public&quot;: true
+  &quot;Version&quot;: {
+    &quot;Id&quot;: 111746,
+    &quot;Changes&quot;: &quot;Optimized after the Hammer update and made changes to the restaurant's exterior&quot;,
+    &quot;FileCount&quot;: 227,
+    &quot;TotalSize&quot;: 175869642,
+    &quot;Hash&quot;: -503011199095951400,
+    &quot;ManifestUrl&quot;: &quot;https://cdn.sbox.game/org/smallboxstudio/spongebobkrustykrab/manifest/111746.json&quot;,
+    &quot;Created&quot;: &quot;2025-07-21T22:47:50.3+00:00&quot;,
+    &quot;EngineVersion&quot;: 19,
+    &quot;AssetVersionId&quot;: 111746
+  },
+  &quot;Public&quot;: true,
+  &quot;Screenshots&quot;: [
+    {
+      &quot;Created&quot;: &quot;2025-06-17T17:05:06.7Z&quot;,
+      &quot;Width&quot;: 1920,
+      &quot;Height&quot;: 1080,
+      &quot;Url&quot;: &quot;https://cdn.sbox.game/org/smallboxstudio/spongebobkrustykrab/screenshots/153a718b-afae-4c31-8271-6324ccc5182a.jpg&quot;,
+      &quot;Thumb&quot;: &quot;https://cdn.sbox.game/org/smallboxstudio/spongebobkrustykrab/screenshots/153a718b-afae-4c31-8271-6324ccc5182a.jpg&quot;
+    }
+  ],
+  &quot;TypeName&quot;: &quot;map&quot;,
+  &quot;PackageReferences&quot;: [],
+  &quot;EditorReferences&quot;: [
+    &quot;facepunch.glass_b&quot;,
+    &quot;facepunch.glass_c&quot;,
+    &quot;caro.sky_001&quot;
+  ]
 }
 </code></pre>
 <h2 id="champs-de-reponse">Champs de Réponse</h2>
@@ -1038,6 +1103,16 @@
 <td>VotesUp</td>
 <td>int</td>
 <td>Nombre de votes positifs</td>
+</tr>
+<tr>
+<td>ReviewStats</td>
+<td>object</td>
+<td>Statistiques de revue et scores</td>
+</tr>
+<tr>
+<td>UsageStats.UsersNow</td>
+<td>int</td>
+<td>Utilisateurs actifs actuels</td>
 </tr>
 </tbody>
 </table>
