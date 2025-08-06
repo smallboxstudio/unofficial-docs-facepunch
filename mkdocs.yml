@@ -1,0 +1,40 @@
+site_name: Facepunch S&box API Unofficial Documentation
+theme:
+  name: material
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: blue
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - scheme: slate
+      primary: indigo
+      accent: blue
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+  font:
+    text: Roboto
+    code: Roboto Mono
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.instant
+    - navigation.top
+    - content.code.copy
+    - content.code.annotate
+
+nav:
+  - Home: index.md
+  - English API:
+      - Search: en/search.md
+      - Players: en/players.md
+      - Packages: en/package.md
+      - News: en/news.md
+  - API Français:
+      - Recherche: fr/search.md
+      - Joueurs: fr/players.md
+      - Packages: fr/package.md
+      - News: fr/news.md
+
