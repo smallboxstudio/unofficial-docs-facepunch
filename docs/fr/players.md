@@ -26,6 +26,7 @@ Récupérer des informations détaillées sur un joueur S&box spécifique en uti
   "Name": "garry",
   "Url": "/u/garry",
   "Avatar": "https://avatars.steamstatic.com/adfd2545a3a5f0eb07ad042873be6aa4e03ef660_medium.jpg",
+  "Online":true,
   "Score": 1200
 }
 ```
@@ -38,6 +39,7 @@ Récupérer des informations détaillées sur un joueur S&box spécifique en uti
 | Name   | string | Nom d'affichage du joueur |
 | Url    | string | URL relative vers la page de profil du joueur |
 | Avatar | string | URL vers l'image d'avatar Steam du joueur |
+| Online | boolean | Indique si le joueur est actuellement en ligne |
 | Score  | int    | Score/réputation actuel du joueur |
 
 ## Réponses d'Erreur
@@ -53,4 +55,5 @@ Récupérer des informations détaillées sur un joueur S&box spécifique en uti
 - Les ID Steam doivent être au format 64-bit (nombre à 17 chiffres commençant par 765...)
 - Le champ `Url` fournit un chemin relatif qui peut être ajouté à l'URL de base du site S&box
 - Les images d'avatar proviennent du CDN de Steam
+- Le champ `Online` indique si le joueur est actuellement actif dans S&box il apparaît pas si le joueur n'est pas en ligne
 - Le Score représente la réputation ou le niveau d'activité du joueur dans la communauté S&box

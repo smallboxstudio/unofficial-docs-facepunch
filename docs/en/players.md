@@ -26,6 +26,7 @@ Retrieve detailed information about a specific S&box player using their Steam ID
   "Name": "garry",
   "Url": "/u/garry",
   "Avatar": "https://avatars.steamstatic.com/adfd2545a3a5f0eb07ad042873be6aa4e03ef660_medium.jpg",
+  "Online":true,
   "Score": 1200
 }
 ```
@@ -38,6 +39,7 @@ Retrieve detailed information about a specific S&box player using their Steam ID
 | Name   | string | Player's display name |
 | Url    | string | Relative URL to the player's profile page |
 | Avatar | string | URL to the player's Steam avatar image |
+| Online | boolean | Indicates if the player is currently online |
 | Score  | int    | Player's current score/reputation |
 
 ## Error Responses
@@ -53,4 +55,5 @@ Retrieve detailed information about a specific S&box player using their Steam ID
 - Steam IDs must be in 64-bit format (17-digit number starting with 765...)
 - The `Url` field provides a relative path that can be appended to the base S&box website URL
 - Avatar images are sourced from Steam's CDN
+- The `Online` field indicates if the player is currently active in S&box. It does not appear if the player is offline.
 - Score represents the player's reputation or activity level within the
