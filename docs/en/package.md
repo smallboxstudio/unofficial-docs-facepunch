@@ -57,6 +57,7 @@ Retrieve detailed information about a specific S&box package including metadata,
       "Users": 1666,
       "Seconds": 700996
     },
+    "UsersNow": 7,
     "Trend": 1.93159413337708
   },
   "ReviewStats": {
@@ -154,6 +155,7 @@ Retrieve detailed information about a specific S&box package including metadata,
 | Favourited          | int   | Number of users who favorited this package |
 | VotesUp             | int   | Number of upvotes |
 | ReviewStats         | object | Review scores and totals |
+| UsageStats.UsersNow | int   | Current active users |
 
 ### Version Information
 | Field              | Type   | Description |
