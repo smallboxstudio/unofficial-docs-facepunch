@@ -893,6 +893,7 @@
   &quot;Name&quot;: &quot;garry&quot;,
   &quot;Url&quot;: &quot;/u/garry&quot;,
   &quot;Avatar&quot;: &quot;https://avatars.steamstatic.com/adfd2545a3a5f0eb07ad042873be6aa4e03ef660_medium.jpg&quot;,
+  &quot;Online&quot;:true,
   &quot;Score&quot;: 1200
 }
 </code></pre>
@@ -925,6 +926,11 @@
 <td>Avatar</td>
 <td>string</td>
 <td>URL vers l'image d'avatar Steam du joueur</td>
+</tr>
+<tr>
+<td>Online</td>
+<td>boolean</td>
+<td>Indique si le joueur est actuellement en ligne</td>
 </tr>
 <tr>
 <td>Score</td>
@@ -961,6 +967,7 @@
 <li>Les ID Steam doivent être au format 64-bit (nombre à 17 chiffres commençant par 765...)</li>
 <li>Le champ <code>Url</code> fournit un chemin relatif qui peut être ajouté à l'URL de base du site S&amp;box</li>
 <li>Les images d'avatar proviennent du CDN de Steam</li>
+<li>Le champ <code>Online</code> indique si le joueur est actuellement actif dans S&amp;box il apparaît pas si le joueur n'est pas en ligne</li>
 <li>Le Score représente la réputation ou le niveau d'activité du joueur dans la communauté S&amp;box</li>
 </ul>
 
