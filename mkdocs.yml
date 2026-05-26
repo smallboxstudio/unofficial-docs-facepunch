@@ -29,14 +29,26 @@ nav:
   - Home: index.md
   - English API:
       - Search: en/search.md
-      - Players: en/players.md
       - Packages: en/package.md
+      - Package Versions: en/versions.md
+      - Reviews: en/reviews.md
+      - Stats: en/stats.md
+      - Leaderboards: en/leaderboard.md
+      - Achievements: en/achievements.md
+      - Players: en/players.md
       - News: en/news.md
+      - Utility: en/utility.md
   - API Français:
       - Recherche: fr/search.md
-      - Joueurs: fr/players.md
       - Packages: fr/package.md
+      - Versions de Package: fr/versions.md
+      - Avis: fr/reviews.md
+      - Statistiques: fr/stats.md
+      - Classements: fr/leaderboard.md
+      - Succès: fr/achievements.md
+      - Joueurs: fr/players.md
       - News: fr/news.md
+      - Utilitaires: fr/utility.md
 
 
 repo_url: https://github.com/smallboxstudio/unofficial-docs-facepunch

@@ -1,29 +1,67 @@
 # Package Search
 
 ## Endpoint
-`GET https://services.facepunch.com/sbox/package/find`
+`GET https://services.facepunch.com/sbox/package/find/2`
 
+> The legacy `/sbox/package/find` endpoint still resolves to the same handler.
 
 ## Description
-Search for packages (maps, gamemodes, assets) available on the S&box platform, with filtering by type, sorting, pagination, etc.
+Search for packages (maps, gamemodes, games, assets…) on the S&box platform with filtering, sorting, and pagination. The query is expressed as a single text string with key prefixes (`type:`, `sort:`, `+tag`, `org:`, …).
 
 ## Query Parameters
 
-| Name  | Type   | Required | Description |
-|-------|--------|----------|-------------|
-| q     | string | Yes      | Search query. Can include `type:<type>` and `sort:<order>`. |
-| take  | int    | Yes      | Maximum number of results to return. |
-| skip  | int    | Yes      | Offset for pagination. |
+| Name | Type   | Required | Default | Description |
+|------|--------|----------|---------|-------------|
+| q    | string | Yes      | —       | Search query. Supports key:value tokens (see below). |
+| take | int    | No       | 100     | Maximum number of results to return. |
+| skip | int    | No       | 0       | Offset for pagination. |
+
+### Supported `q` tokens
+
+| Token form    | Effect |
+|---------------|--------|
+| `<text>`      | Free text search across title, summary and description |
+| `+<tag>`      | Require tag (multiple `+` tokens compose as AND) |
+| `type:<type>` | Filter by package type (`game`, `map`, `gamemode`, `tool`, `tutorial`, `clothing`, …) |
+| `sort:<order>` | Sort mode (see table below) |
+| `org:<ident>` | Restrict to a specific organization |
+| `asset:<name>` | Filter by primary asset type |
+| `contest:<name>` | Restrict to a contest |
+| `in:<collection>` | Restrict to a collection |
+| `target:<pkg>` | Restrict to content built for a specific target package |
+| `+game:<pkg>` | Restrict to content created for this game (`any` to clear) |
+| `is:unplayed` | Hide packages already played by the requesting user (auth) |
+| `is:fave` | Restrict to the requesting user's favourites (auth) |
+
+### `sort:` values
+
+| Value | Meaning |
+|-------|---------|
+| `trending` | Trending (default popular variant) |
+| `popular` | Popular |
+| `newest` / `oldest` | Sort by creation date |
+| `updated` | Recently updated |
+| `friends` | Friend-played packages (auth) |
+| `random` | Randomized |
+| `upvotes` / `downvotes` | Vote counts |
+| `favcount` | Favourite count |
+| `live`, `referenced`, `referencing`, `user`, `used`, `played` | Recently used |
+| `rankd` / `rankday`, `rankw` / `rankweek`, `rankm` / `rankmonth` | Period rank |
+| `spawns`, `spawnsday`, `spawnsweek`, `spawnsmonth` | Spawn counts |
+| `playersnow` | Live concurrent players |
+| `bestrated` / `rated` | Wilson lower bound on review proportion |
+| `mostreviewed` / `reviewed` | Total review count |
+| `quality` | Composite quality score |
+| `hiddengem` / `underrated` | Well-reviewed but low-traffic |
 
 ---
 
 ## Example Request
-`GET /sbox/package/find?q=type:map%20sort:trending&take=6&skip=0`
-
+`GET /sbox/package/find/2?q=type:map+sort:trending&take=6&skip=0`
 
 ---
 
-## Example Response
+## Example Response (truncated)
 ```json
 {
   "Packages": [
@@ -31,49 +69,72 @@ Search for packages (maps, gamemodes, assets) available on the S&box platform, w
       "Org": {
         "Ident": "smallboxstudio",
         "Title": "Small Box Studio",
-        "Description": "Team Small Box Studio",
-        "Thumb": "https://cdn.sbox.game/org/smallboxstudio/logo.7256b703-3987-41c5-8355-397782256ea4.png",
+        "Thumb": "https://cdn.sbox.game/org/smallboxstudio/logo.png",
         "Discord": "https://discord.gg/ucvM2sfTBP"
       },
       "Ident": "spongebobkrustykrab",
       "FullIdent": "smallboxstudio.spongebobkrustykrab",
       "Title": "Sponge Bob Krusty Krab",
       "Summary": "Ohhhh, who lives in a pineapple under the sea ?",
-      "Thumb": "https://cdn.sbox.game/org/smallboxstudio/spongebobkrustykrab/thumb/1418c92c-de45-4b28-8002-7a52e1974827.png",
-      "ThumbWide": "https://cdn.sbox.game/org/smallboxstudio/spongebobkrustykrab/thumb/4079eac1-d49d-4761-aedc-4c27dbdc92b5.png",
-      "ThumbTall": "https://cdn.sbox.game/org/smallboxstudio/spongebobkrustykrab/thumb/1418c92c-de45-4b28-8002-7a52e1974827.png",
+      "Thumb": "https://cdn.sbox.game/.../thumb/...png",
       "TypeName": "map",
       "Updated": "2025-07-21T22:47:55.2+00:00",
       "Created": "2025-06-08T14:06:13.7+00:00",
-      "UsageStats": {
-
-      },
-      "Tags": [
-        "bob",
-        "hunt",
-        "krab",
-        "krusty",
-        "map",
-        "ph",
-        "prop",
-        "prophunt",
-        "props",
-        "sponge"
-      ],
+      "UsageStats": {},
+      "Tags": ["map", "ph", "prop", "prophunt"],
       "Favourited": 15,
       "Referencing": 12,
       "VotesUp": 10,
       "Public": true
-    },
+    }
+  ],
+  "TotalCount": 1347,
+  "Facets": [
+    {
+      "Name": "category",
+      "Title": "Category",
+      "Entries": [
+        { "Name": "wall", "Title": "Wall", "Icon": "...", "Count": 432, "Children": [] }
+      ]
+    }
+  ],
+  "Tags": { "physics": 1820, "multiplayer": 1240 },
+  "Orders": [],
+  "Properties": []
+}
 ```
 
+## Response Fields
+
+### Root (`PackageFindResult`)
+| Field      | Type    | Description |
+|------------|---------|-------------|
+| Packages   | array   | List of `PackageWrapMinimal` entries (see Package endpoint) |
+| TotalCount | long    | Total number of packages matching the query |
+| Facets     | array   | Faceted filter groups for refining the search |
+| Tags       | object  | Map of `tagName → count` for tag suggestions |
+| Orders     | array   | Available sort orders for the active query |
+| Properties | array   | Property tags surfaced by the active query |
+
+### Facet (`PackageFacet`)
+| Field   | Type   | Description |
+|---------|--------|-------------|
+| Name    | string | Facet identifier |
+| Title   | string | Display title |
+| Entries | array  | Pre-sorted entries — do not reorder client-side |
+
+### Facet entry
+| Field    | Type   | Description |
+|----------|--------|-------------|
+| Name     | string | Token to apply when filtering (e.g. `category:wall`) |
+| Title    | string | Display title |
+| Icon     | string | Optional icon |
+| Count    | int    | Number of packages in this bucket |
+| Children | array  | Nested entries (same shape, recursive) |
 
 ## Notes
 
-- The `q` parameter can be used to filter by package type (e.g., `type:map`, `type:gamemode`) and sort order (e.g., `sort:trending`, `sort:newest`).
-- The `take` parameter specifies how many results to return, while `skip` is used for pagination.
-- The response includes package details such as organization, title, summary, thumbnail, type, and various statistics like votes and favorites.
-- The `TotalCount` field indicates the total number of packages matching the search criteria.
-
-
-Do you want me to also add a **"Filter Options"** table listing all possible `type:` and `sort:` values so this page is more complete? That would make the documentation much more useful.
+- Tokens in `q` are separated by spaces. URL-encode spaces as `%20` or `+`.
+- Unknown `key:value` tokens are converted into facet filters automatically.
+- The `Facets`/`Tags`/`Orders`/`Properties` fields may be empty if the query does not request them or the result set is too narrow.
+- For full per-package details, follow up with `GET /sbox/package/get/2/{org.package}`.
