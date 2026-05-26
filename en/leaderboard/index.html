@@ -9,10 +9,10 @@
       
       
       
-        <link rel="prev" href="../achievements/">
+        <link rel="prev" href="../stats/">
       
       
-        <link rel="next" href="../news/">
+        <link rel="next" href="../achievements/">
       
       
         
@@ -23,7 +23,7 @@
     
     
       
-        <title>Players - Facepunch S&box API Unofficial Documentation</title>
+        <title>Leaderboards - Facepunch S&box API Unofficial Documentation</title>
       
     
     
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#player-information" class="md-skip">
+        <a href="#leaderboards" class="md-skip">
           Skip to content
         </a>
       
@@ -108,7 +108,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Players
+              Leaderboards
             
           </span>
         </div>
@@ -547,62 +547,6 @@
                 
   
   
-  
-  
-    <li class="md-nav__item">
-      <a href="../leaderboard/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Leaderboards
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../achievements/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Achievements
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
     
   
   
@@ -622,7 +566,7 @@
   <span class="md-ellipsis">
     
   
-    Players
+    Leaderboards
   
 
     
@@ -640,7 +584,7 @@
   <span class="md-ellipsis">
     
   
-    Players
+    Leaderboards
   
 
     
@@ -688,10 +632,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#path-parameters" class="md-nav__link">
+  <a href="#v2-query-parameters" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Path Parameters
+        V2 Query Parameters
       
     </span>
   </a>
@@ -699,10 +643,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#query-parameters" class="md-nav__link">
+  <a href="#v1-path-parameters" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Query Parameters
+        V1 Path Parameters
       
     </span>
   </a>
@@ -710,130 +654,46 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#get-sboxplayersteamid" class="md-nav__link">
+  <a href="#example-requests" class="md-nav__link">
     <span class="md-ellipsis">
       
-        GET /sbox/player/{steamId}
+        Example Requests
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="GET /sbox/player/{steamId}">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#example-request" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Example Request
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#example-response" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Example Response
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#response-fields" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Response Fields
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#get-sboxplayersteamidoverview" class="md-nav__link">
+  <a href="#example-response-v2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        GET /sbox/player/{steamId}/overview
+        Example Response (v2)
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="GET /sbox/player/{steamId}/overview">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#example-response-truncated" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Example Response (truncated)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#response-fields-playeroverview" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Response Fields (PlayerOverview)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#get-sboxplayersteamidachievementprogress" class="md-nav__link">
+  <a href="#response-fields-v2-leaderboardresponseex" class="md-nav__link">
     <span class="md-ellipsis">
       
-        GET /sbox/player/{steamId}/achievementprogress
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="GET /sbox/player/{steamId}/achievementprogress">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#example-response-truncated_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Example Response (truncated)
+        Response Fields (v2 — LeaderboardResponseEx)
       
     </span>
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#response-fields-playerachievementprogress" class="md-nav__link">
+      
+        <li class="md-nav__item">
+  <a href="#response-fields-v1-leaderboardresponselegacy" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Response Fields (PlayerAchievementProgress)
+        Response Fields (v1 — LeaderboardResponseLegacy)
       
     </span>
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -863,6 +723,62 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../achievements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Achievements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../players/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Players
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -1319,10 +1235,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#path-parameters" class="md-nav__link">
+  <a href="#v2-query-parameters" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Path Parameters
+        V2 Query Parameters
       
     </span>
   </a>
@@ -1330,10 +1246,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#query-parameters" class="md-nav__link">
+  <a href="#v1-path-parameters" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Query Parameters
+        V1 Path Parameters
       
     </span>
   </a>
@@ -1341,130 +1257,46 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#get-sboxplayersteamid" class="md-nav__link">
+  <a href="#example-requests" class="md-nav__link">
     <span class="md-ellipsis">
       
-        GET /sbox/player/{steamId}
+        Example Requests
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="GET /sbox/player/{steamId}">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#example-request" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Example Request
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#example-response" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Example Response
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#response-fields" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Response Fields
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#get-sboxplayersteamidoverview" class="md-nav__link">
+  <a href="#example-response-v2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        GET /sbox/player/{steamId}/overview
+        Example Response (v2)
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="GET /sbox/player/{steamId}/overview">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#example-response-truncated" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Example Response (truncated)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#response-fields-playeroverview" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Response Fields (PlayerOverview)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#get-sboxplayersteamidachievementprogress" class="md-nav__link">
+  <a href="#response-fields-v2-leaderboardresponseex" class="md-nav__link">
     <span class="md-ellipsis">
       
-        GET /sbox/player/{steamId}/achievementprogress
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="GET /sbox/player/{steamId}/achievementprogress">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#example-response-truncated_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Example Response (truncated)
+        Response Fields (v2 — LeaderboardResponseEx)
       
     </span>
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#response-fields-playerachievementprogress" class="md-nav__link">
+      
+        <li class="md-nav__item">
+  <a href="#response-fields-v1-leaderboardresponselegacy" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Response Fields (PlayerAchievementProgress)
+        Response Fields (v1 — LeaderboardResponseLegacy)
       
     </span>
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -1510,7 +1342,7 @@
   
 
 
-<h1 id="player-information">Player Information</h1>
+<h1 id="leaderboards">Leaderboards</h1>
 <h2 id="endpoints">Endpoints</h2>
 <table>
 <thead>
@@ -1522,21 +1354,17 @@
 <tbody>
 <tr>
 <td>GET</td>
-<td><code>https://services.facepunch.com/sbox/player/{steamId}</code></td>
+<td><code>https://services.facepunch.com/sbox/package/leaderboard/2/</code></td>
 </tr>
 <tr>
 <td>GET</td>
-<td><code>https://services.facepunch.com/sbox/player/{steamId}/overview</code></td>
-</tr>
-<tr>
-<td>GET</td>
-<td><code>https://services.facepunch.com/sbox/player/{steamId}/achievementprogress</code></td>
+<td><code>https://services.facepunch.com/sbox/package/leaderboard/1/{package}/{leaderboard}/u/{steamId}/{mode}</code></td>
 </tr>
 </tbody>
 </table>
 <h2 id="description">Description</h2>
-<p>Retrieve information about a specific S&amp;box player by Steam ID — basic profile, aggregate platform overview, and per-package achievement progress.</p>
-<h2 id="path-parameters">Path Parameters</h2>
+<p>Query leaderboards declared by a package. The v2 endpoint takes a flat query object and is the recommended form. The v1 endpoint is kept for engine backwards-compatibility.</p>
+<h2 id="v2-query-parameters">V2 Query Parameters</h2>
 <table>
 <thead>
 <tr>
@@ -1547,52 +1375,161 @@
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>ident</td>
+<td>string</td>
+<td>Yes</td>
+<td>Full package identifier (<code>org.package</code>). Maps to <code>PackageIdent</code> server-side.</td>
+</tr>
+<tr>
+<td>Stat</td>
+<td>string</td>
+<td>Yes</td>
+<td>Stat name backing the leaderboard</td>
+</tr>
+<tr>
+<td>Aggregation</td>
+<td>enum</td>
+<td>No</td>
+<td><code>Sum</code>, <code>Max</code>, <code>Min</code>, <code>Last</code>, <code>Avg</code></td>
+</tr>
+<tr>
+<td>SortOrder</td>
+<td>enum</td>
+<td>No</td>
+<td><code>Desc</code> (default) or <code>Asc</code></td>
+</tr>
+<tr>
+<td>DateFilter</td>
+<td>enum</td>
+<td>No</td>
+<td><code>None</code>, <code>Year</code>, <code>Month</code>, <code>Week</code>, <code>Day</code></td>
+</tr>
+<tr>
+<td>Date</td>
+<td>string</td>
+<td>No</td>
+<td>Anchor date for <code>DateFilter</code> (ISO 8601)</td>
+</tr>
+<tr>
+<td>CenterSteamId</td>
+<td>long</td>
+<td>No</td>
+<td>Center the window on this Steam ID</td>
+</tr>
+<tr>
+<td>Offset</td>
+<td>long</td>
+<td>No</td>
+<td>Pagination offset (default 0)</td>
+</tr>
+<tr>
+<td>Country</td>
+<td>string</td>
+<td>No</td>
+<td>ISO country code filter</td>
+</tr>
+<tr>
+<td>Count</td>
+<td>int</td>
+<td>No</td>
+<td>Page size (default 50)</td>
+</tr>
+<tr>
+<td>SteamId</td>
+<td>long</td>
+<td>No</td>
+<td>Querying user's Steam ID</td>
+</tr>
+<tr>
+<td>Friends</td>
+<td>bool</td>
+<td>No</td>
+<td>If true, restrict to friends of <code>SteamId</code></td>
+</tr>
+<tr>
+<td>Include</td>
+<td>string</td>
+<td>No</td>
+<td>Comma-separated Steam IDs to always include</td>
+</tr>
+<tr>
+<td>IncludeQuery</td>
+<td>bool</td>
+<td>No</td>
+<td>Debug: return the underlying query string</td>
+</tr>
+</tbody>
+</table>
+<h2 id="v1-path-parameters">V1 Path Parameters</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>package</td>
+<td>string</td>
+<td>Yes</td>
+<td>Full package identifier</td>
+</tr>
+<tr>
+<td>leaderboard</td>
+<td>string</td>
+<td>Yes</td>
+<td>Leaderboard name declared by the package</td>
+</tr>
 <tr>
 <td>steamId</td>
 <td>long</td>
 <td>Yes</td>
-<td>Player's Steam ID (64-bit, 17-digit format)</td>
+<td>User to center on</td>
 </tr>
-</tbody>
-</table>
-<h2 id="query-parameters">Query Parameters</h2>
-<table>
-<thead>
 <tr>
-<th>Endpoint</th>
-<th>Name</th>
-<th>Type</th>
-<th>Required</th>
-<th>Default</th>
-<th>Description</th>
+<td>mode</td>
+<td>string</td>
+<td>Yes</td>
+<td>Mode token (engine-defined; e.g. <code>Global</code>, <code>Friends</code>)</td>
 </tr>
-</thead>
-<tbody>
 <tr>
-<td><code>/achievementprogress</code></td>
 <td>take</td>
 <td>int</td>
 <td>No</td>
-<td>10</td>
-<td>Maximum number of packages to return</td>
+<td>Page size (default 20)</td>
 </tr>
 </tbody>
 </table>
 <hr />
-<h2 id="get-sboxplayersteamid"><code>GET /sbox/player/{steamId}</code></h2>
-<h3 id="example-request">Example Request</h3>
-<p><code>GET /sbox/player/76561197960279927</code></p>
-<h3 id="example-response">Example Response</h3>
+<h2 id="example-requests">Example Requests</h2>
+<pre><code>GET /sbox/package/leaderboard/2/?ident=facepunch.testbed&amp;Stat=balls_fired&amp;SortOrder=Desc&amp;Count=20
+GET /sbox/package/leaderboard/1/facepunch.testbed/score/u/76561197960279927/Global?take=20
+</code></pre>
+<hr />
+<h2 id="example-response-v2">Example Response (v2)</h2>
 <pre><code class="language-json">{
-  &quot;Id&quot;: 76561197960279927,
-  &quot;Name&quot;: &quot;garry&quot;,
-  &quot;Url&quot;: &quot;/u/garry&quot;,
-  &quot;Avatar&quot;: &quot;https://avatars.steamstatic.com/adfd2545a3a5f0eb07ad042873be6aa4e03ef660_medium.jpg&quot;,
-  &quot;Online&quot;: true,
-  &quot;Score&quot;: 1375
+  &quot;Stat&quot;: &quot;balls_fired&quot;,
+  &quot;TotalEntries&quot;: 8109,
+  &quot;Entries&quot;: [
+    {
+      &quot;Rank&quot;: 1,
+      &quot;Value&quot;: 12054,
+      &quot;SteamId&quot;: 76561197960279927,
+      &quot;CountryCode&quot;: &quot;GB&quot;,
+      &quot;DisplayName&quot;: &quot;garry&quot;,
+      &quot;Timestamp&quot;: &quot;2026-05-22T12:25:58.4+00:00&quot;,
+      &quot;DataUrl&quot;: null
+    }
+  ],
+  &quot;Query&quot;: null,
+  &quot;DateDescription&quot;: &quot;All time&quot;
 }
 </code></pre>
-<h3 id="response-fields">Response Fields</h3>
+<h2 id="response-fields-v2-leaderboardresponseex">Response Fields (v2 — <code>LeaderboardResponseEx</code>)</h2>
 <table>
 <thead>
 <tr>
@@ -1603,212 +1540,106 @@
 </thead>
 <tbody>
 <tr>
-<td>Id</td>
-<td>long</td>
-<td>Player's Steam ID (64-bit)</td>
+<td>Stat</td>
+<td>string</td>
+<td>Stat name (echoed)</td>
 </tr>
 <tr>
-<td>Name</td>
+<td>TotalEntries</td>
+<td>long</td>
+<td>Total number of ranked entries</td>
+</tr>
+<tr>
+<td>Entries</td>
+<td>array</td>
+<td>Leaderboard rows</td>
+</tr>
+<tr>
+<td>Entries[].Rank</td>
+<td>long</td>
+<td>1-based rank</td>
+</tr>
+<tr>
+<td>Entries[].Value</td>
+<td>number</td>
+<td>Stat value</td>
+</tr>
+<tr>
+<td>Entries[].SteamId</td>
+<td>long</td>
+<td>Player's Steam ID</td>
+</tr>
+<tr>
+<td>Entries[].CountryCode</td>
+<td>string</td>
+<td>ISO country code</td>
+</tr>
+<tr>
+<td>Entries[].DisplayName</td>
+<td>string</td>
+<td>Player's display name</td>
+</tr>
+<tr>
+<td>Entries[].Timestamp</td>
+<td>string</td>
+<td>When the value was recorded (ISO 8601)</td>
+</tr>
+<tr>
+<td>Entries[].DataUrl</td>
+<td>string</td>
+<td>Optional pointer to attached run/replay data</td>
+</tr>
+<tr>
+<td>Query</td>
+<td>string</td>
+<td>Echo of the underlying query (when <code>IncludeQuery=true</code>)</td>
+</tr>
+<tr>
+<td>DateDescription</td>
+<td>string</td>
+<td>Human-readable window summary</td>
+</tr>
+</tbody>
+</table>
+<h2 id="response-fields-v1-leaderboardresponselegacy">Response Fields (v1 — <code>LeaderboardResponseLegacy</code>)</h2>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Title</td>
+<td>string</td>
+<td>Leaderboard title</td>
+</tr>
+<tr>
+<td>DisplayName</td>
 <td>string</td>
 <td>Display name</td>
 </tr>
 <tr>
-<td>Url</td>
+<td>Description</td>
 <td>string</td>
-<td>Relative URL to the player profile (<code>/u/...</code>)</td>
+<td>Description</td>
 </tr>
 <tr>
-<td>Avatar</td>
+<td>Unit</td>
 <td>string</td>
-<td>URL to the Steam avatar image</td>
+<td>Unit of measure</td>
 </tr>
 <tr>
-<td>Online</td>
-<td>bool</td>
-<td>Indicates if the player is currently active in S&amp;box (omitted when false in some responses)</td>
-</tr>
-<tr>
-<td>Private</td>
-<td>bool</td>
-<td>Indicates a private profile (omitted when false)</td>
-</tr>
-<tr>
-<td>Score</td>
-<td>int</td>
-<td>Player's reputation/activity score</td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h2 id="get-sboxplayersteamidoverview"><code>GET /sbox/player/{steamId}/overview</code></h2>
-<p>Aggregated platform stats and recent activity for the player.</p>
-<h3 id="example-response-truncated">Example Response (truncated)</h3>
-<pre><code class="language-json">{
-  &quot;Player&quot;: { &quot;Id&quot;: 76561197960279927, &quot;Name&quot;: &quot;garry&quot;, &quot;Score&quot;: 1375 },
-  &quot;GamesPlayed&quot;: 341,
-  &quot;TotalSessions&quot;: 3028,
-  &quot;SecondsPlayed&quot;: 548335,
-  &quot;Achievements&quot;: 60,
-  &quot;TotalFavourites&quot;: 68,
-  &quot;TotalReviews&quot;: 33,
-  &quot;NegativeReviews&quot;: 3,
-  &quot;PositiveReviews&quot;: 15,
-  &quot;Avatar&quot;: &quot;{\&quot;Items\&quot;:[...],\&quot;Height\&quot;:0.62,\&quot;DisplayName\&quot;:\&quot;Garry\&quot;}&quot;,
-  &quot;LatestReviews&quot;: [ /* PackageReviewDto[] */ ],
-  &quot;MostPlayed&quot;: { /* PackageWrapMinimal */ },
-  &quot;LatestPlayed&quot;: { /* PackageWrapMinimal */ }
-}
-</code></pre>
-<h3 id="response-fields-playeroverview">Response Fields (<code>PlayerOverview</code>)</h3>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Player</td>
-<td>object</td>
-<td>Basic player profile (same shape as the root endpoint)</td>
-</tr>
-<tr>
-<td>GamesPlayed</td>
+<td>TotalEntries</td>
 <td>long</td>
-<td>Distinct games the player has launched</td>
+<td>Total ranked entries</td>
 </tr>
 <tr>
-<td>TotalSessions</td>
-<td>long</td>
-<td>Total play sessions across all packages</td>
-</tr>
-<tr>
-<td>SecondsPlayed</td>
-<td>long</td>
-<td>Cumulative time played, in seconds</td>
-</tr>
-<tr>
-<td>Achievements</td>
-<td>long</td>
-<td>Number of achievements unlocked</td>
-</tr>
-<tr>
-<td>TotalFavourites</td>
-<td>long</td>
-<td>Packages this player has favourited</td>
-</tr>
-<tr>
-<td>TotalReviews</td>
-<td>long</td>
-<td>Reviews authored by this player</td>
-</tr>
-<tr>
-<td>NegativeReviews</td>
-<td>long</td>
-<td>Subset of reviews scored as Negative</td>
-</tr>
-<tr>
-<td>PositiveReviews</td>
-<td>long</td>
-<td>Subset of reviews scored as Positive</td>
-</tr>
-<tr>
-<td>Avatar</td>
-<td>string</td>
-<td>JSON-encoded Citizen avatar configuration (clothing items, height, name…) — parse client-side</td>
-</tr>
-<tr>
-<td>LatestReviews</td>
+<td>Entries</td>
 <td>array</td>
-<td>Most recent reviews by this player (<code>PackageReviewDto[]</code>)</td>
-</tr>
-<tr>
-<td>MostPlayed</td>
-<td>object</td>
-<td>Package with the highest play time (<code>PackageWrapMinimal</code>)</td>
-</tr>
-<tr>
-<td>LatestPlayed</td>
-<td>object</td>
-<td>Most recently played package (<code>PackageWrapMinimal</code>)</td>
-</tr>
-<tr>
-<td>TopPlayed</td>
-<td>array</td>
-<td>Top played packages with <code>SecondsPlayed</code>, <code>AchUnlocked</code>, <code>LastSeen</code></td>
-</tr>
-<tr>
-<td>RecentlyPlayed</td>
-<td>array</td>
-<td>Most recently played packages (same shape as <code>TopPlayed</code>)</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p>The <code>Avatar</code> field is a <strong>string</strong> containing JSON. It encodes the player's Citizen outfit; you must <code>JSON.parse</code> it before reading nested fields.</p>
-</blockquote>
-<hr />
-<h2 id="get-sboxplayersteamidachievementprogress"><code>GET /sbox/player/{steamId}/achievementprogress</code></h2>
-<p>Per-package achievement progress for the player.</p>
-<h3 id="example-response-truncated_1">Example Response (truncated)</h3>
-<pre><code class="language-json">[
-  {
-    &quot;Package&quot;: { /* PackageWrapMinimal */ },
-    &quot;Achievements&quot;: [ /* AchievementDto[] */ ],
-    &quot;LastSeen&quot;: &quot;2026-05-18T19:12:57.7+00:00&quot;,
-    &quot;Unlocked&quot;: 3,
-    &quot;Score&quot;: 80,
-    &quot;Total&quot;: 12,
-    &quot;TotalScore&quot;: 500
-  }
-]
-</code></pre>
-<h3 id="response-fields-playerachievementprogress">Response Fields (<code>PlayerAchievementProgress</code>)</h3>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Package</td>
-<td>object</td>
-<td>Minimal package wrapper</td>
-</tr>
-<tr>
-<td>Achievements</td>
-<td>array</td>
-<td>Per-achievement entries (see Achievements endpoint)</td>
-</tr>
-<tr>
-<td>LastSeen</td>
-<td>string</td>
-<td>Last play timestamp for this package (ISO 8601)</td>
-</tr>
-<tr>
-<td>Unlocked</td>
-<td>int</td>
-<td>Number of achievements the player has unlocked</td>
-</tr>
-<tr>
-<td>Score</td>
-<td>int</td>
-<td>Sum of <code>Score</code> from unlocked achievements</td>
-</tr>
-<tr>
-<td>Total</td>
-<td>int</td>
-<td>Total achievements in the package</td>
-</tr>
-<tr>
-<td>TotalScore</td>
-<td>int</td>
-<td>Sum of <code>Score</code> across all achievements in the package</td>
+<td>Rows with <code>{ Me, Rank, Value, ValueString, SteamId, CountryCode, DisplayName }</code></td>
 </tr>
 </tbody>
 </table>
@@ -1823,11 +1654,11 @@
 <tbody>
 <tr>
 <td>404</td>
-<td>Player not found</td>
+<td>Package or stat not found</td>
 </tr>
 <tr>
 <td>400</td>
-<td>Invalid Steam ID format</td>
+<td>Invalid query parameters</td>
 </tr>
 <tr>
 <td>429</td>
@@ -1837,10 +1668,10 @@
 </table>
 <h2 id="notes">Notes</h2>
 <ul>
-<li>Steam IDs must be 64-bit (17-digit, prefixed with <code>7656</code>).</li>
-<li>The <code>Url</code> field is a relative path: prepend <code>https://sbox.game</code> to get the full URL.</li>
-<li>The <code>Online</code> and <code>Private</code> fields are omitted from responses when false.</li>
-<li>Use the <code>take</code> parameter on <code>/achievementprogress</code> to limit how many packages are returned (default 10).</li>
+<li>The v2 endpoint binds the path parameter <code>ident</code> to the server-side <code>PackageIdent</code> property — the URL must use <code>ident=</code>.</li>
+<li>An empty leaderboard returns <code>{ "Stat": "...", "Entries": [] }</code>.</li>
+<li>Combine <code>CenterSteamId</code> and <code>Count</code> to fetch a window around a specific player.</li>
+<li><code>DateFilter</code>/<code>Date</code> together produce period-scoped boards (e.g. <code>DateFilter=Week&amp;Date=2026-05-25</code>).</li>
 </ul>
 
 

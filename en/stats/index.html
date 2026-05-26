@@ -9,10 +9,10 @@
       
       
       
-        <link rel="prev" href="../achievements/">
+        <link rel="prev" href="../reviews/">
       
       
-        <link rel="next" href="../news/">
+        <link rel="next" href="../leaderboard/">
       
       
         
@@ -23,7 +23,7 @@
     
     
       
-        <title>Players - Facepunch S&box API Unofficial Documentation</title>
+        <title>Stats - Facepunch S&box API Unofficial Documentation</title>
       
     
     
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#player-information" class="md-skip">
+        <a href="#package-stats" class="md-skip">
           Skip to content
         </a>
       
@@ -108,7 +108,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Players
+              Stats
             
           </span>
         </div>
@@ -519,10 +519,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../stats/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stats
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -538,6 +565,142 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#endpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Endpoints
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#description" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Description
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#path-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Path Parameters
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-requests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example Requests
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-response-global" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example Response (global)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#response-fields" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Response Fields
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Response Fields">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#globalstat" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GlobalStat
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#playerstat-per-user-endpoint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PlayerStat (per-user endpoint)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#error-responses" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Error Responses
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notes
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -603,37 +766,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Players
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../players/" class="md-nav__link">
         
   
   
@@ -649,220 +785,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#endpoints" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Endpoints
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#description" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Description
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#path-parameters" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Path Parameters
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#query-parameters" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Query Parameters
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#get-sboxplayersteamid" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        GET /sbox/player/{steamId}
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="GET /sbox/player/{steamId}">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#example-request" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Example Request
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#example-response" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Example Response
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#response-fields" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Response Fields
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#get-sboxplayersteamidoverview" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        GET /sbox/player/{steamId}/overview
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="GET /sbox/player/{steamId}/overview">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#example-response-truncated" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Example Response (truncated)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#response-fields-playeroverview" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Response Fields (PlayerOverview)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#get-sboxplayersteamidachievementprogress" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        GET /sbox/player/{steamId}/achievementprogress
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="GET /sbox/player/{steamId}/achievementprogress">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#example-response-truncated_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Example Response (truncated)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#response-fields-playerachievementprogress" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Response Fields (PlayerAchievementProgress)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#error-responses" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Error Responses
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#notes" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Notes
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1330,10 +1252,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#query-parameters" class="md-nav__link">
+  <a href="#example-requests" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Query Parameters
+        Example Requests
       
     </span>
   </a>
@@ -1341,40 +1263,17 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#get-sboxplayersteamid" class="md-nav__link">
+  <a href="#example-response-global" class="md-nav__link">
     <span class="md-ellipsis">
       
-        GET /sbox/player/{steamId}
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="GET /sbox/player/{steamId}">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#example-request" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Example Request
+        Example Response (global)
       
     </span>
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#example-response" class="md-nav__link">
-    <span class="md-ellipsis">
       
-        Example Response
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
+        <li class="md-nav__item">
   <a href="#response-fields" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1383,30 +1282,14 @@
     </span>
   </a>
   
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#get-sboxplayersteamidoverview" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        GET /sbox/player/{steamId}/overview
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="GET /sbox/player/{steamId}/overview">
+    <nav class="md-nav" aria-label="Response Fields">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#example-response-truncated" class="md-nav__link">
+  <a href="#globalstat" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Example Response (truncated)
+        GlobalStat
       
     </span>
   </a>
@@ -1414,49 +1297,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#response-fields-playeroverview" class="md-nav__link">
+  <a href="#playerstat-per-user-endpoint" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Response Fields (PlayerOverview)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#get-sboxplayersteamidachievementprogress" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        GET /sbox/player/{steamId}/achievementprogress
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="GET /sbox/player/{steamId}/achievementprogress">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#example-response-truncated_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Example Response (truncated)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#response-fields-playerachievementprogress" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Response Fields (PlayerAchievementProgress)
+        PlayerStat (per-user endpoint)
       
     </span>
   </a>
@@ -1510,7 +1354,7 @@
   
 
 
-<h1 id="player-information">Player Information</h1>
+<h1 id="package-stats">Package Stats</h1>
 <h2 id="endpoints">Endpoints</h2>
 <table>
 <thead>
@@ -1522,20 +1366,16 @@
 <tbody>
 <tr>
 <td>GET</td>
-<td><code>https://services.facepunch.com/sbox/player/{steamId}</code></td>
+<td><code>https://services.facepunch.com/sbox/package/stats/2/{packageIdent}</code></td>
 </tr>
 <tr>
 <td>GET</td>
-<td><code>https://services.facepunch.com/sbox/player/{steamId}/overview</code></td>
-</tr>
-<tr>
-<td>GET</td>
-<td><code>https://services.facepunch.com/sbox/player/{steamId}/achievementprogress</code></td>
+<td><code>https://services.facepunch.com/sbox/package/stats/2/{packageIdent}/u/{steamId}</code></td>
 </tr>
 </tbody>
 </table>
 <h2 id="description">Description</h2>
-<p>Retrieve information about a specific S&amp;box player by Steam ID — basic profile, aggregate platform overview, and per-package achievement progress.</p>
+<p>Retrieve aggregated gameplay stats published by a package. The first endpoint returns the global aggregate for every stat the package declares. The second returns a single user's per-stat values.</p>
 <h2 id="path-parameters">Path Parameters</h2>
 <table>
 <thead>
@@ -1548,224 +1388,44 @@
 </thead>
 <tbody>
 <tr>
+<td>packageIdent</td>
+<td>string</td>
+<td>Yes</td>
+<td>Full package identifier (<code>org.package</code>)</td>
+</tr>
+<tr>
 <td>steamId</td>
 <td>long</td>
-<td>Yes</td>
-<td>Player's Steam ID (64-bit, 17-digit format)</td>
-</tr>
-</tbody>
-</table>
-<h2 id="query-parameters">Query Parameters</h2>
-<table>
-<thead>
-<tr>
-<th>Endpoint</th>
-<th>Name</th>
-<th>Type</th>
-<th>Required</th>
-<th>Default</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>/achievementprogress</code></td>
-<td>take</td>
-<td>int</td>
-<td>No</td>
-<td>10</td>
-<td>Maximum number of packages to return</td>
+<td>Yes (user)</td>
+<td>Steam ID of the user whose stats to retrieve</td>
 </tr>
 </tbody>
 </table>
 <hr />
-<h2 id="get-sboxplayersteamid"><code>GET /sbox/player/{steamId}</code></h2>
-<h3 id="example-request">Example Request</h3>
-<p><code>GET /sbox/player/76561197960279927</code></p>
-<h3 id="example-response">Example Response</h3>
-<pre><code class="language-json">{
-  &quot;Id&quot;: 76561197960279927,
-  &quot;Name&quot;: &quot;garry&quot;,
-  &quot;Url&quot;: &quot;/u/garry&quot;,
-  &quot;Avatar&quot;: &quot;https://avatars.steamstatic.com/adfd2545a3a5f0eb07ad042873be6aa4e03ef660_medium.jpg&quot;,
-  &quot;Online&quot;: true,
-  &quot;Score&quot;: 1375
-}
+<h2 id="example-requests">Example Requests</h2>
+<pre><code>GET /sbox/package/stats/2/facepunch.testbed
+GET /sbox/package/stats/2/facepunch.testbed/u/76561197960279927
 </code></pre>
-<h3 id="response-fields">Response Fields</h3>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Id</td>
-<td>long</td>
-<td>Player's Steam ID (64-bit)</td>
-</tr>
-<tr>
-<td>Name</td>
-<td>string</td>
-<td>Display name</td>
-</tr>
-<tr>
-<td>Url</td>
-<td>string</td>
-<td>Relative URL to the player profile (<code>/u/...</code>)</td>
-</tr>
-<tr>
-<td>Avatar</td>
-<td>string</td>
-<td>URL to the Steam avatar image</td>
-</tr>
-<tr>
-<td>Online</td>
-<td>bool</td>
-<td>Indicates if the player is currently active in S&amp;box (omitted when false in some responses)</td>
-</tr>
-<tr>
-<td>Private</td>
-<td>bool</td>
-<td>Indicates a private profile (omitted when false)</td>
-</tr>
-<tr>
-<td>Score</td>
-<td>int</td>
-<td>Player's reputation/activity score</td>
-</tr>
-</tbody>
-</table>
 <hr />
-<h2 id="get-sboxplayersteamidoverview"><code>GET /sbox/player/{steamId}/overview</code></h2>
-<p>Aggregated platform stats and recent activity for the player.</p>
-<h3 id="example-response-truncated">Example Response (truncated)</h3>
-<pre><code class="language-json">{
-  &quot;Player&quot;: { &quot;Id&quot;: 76561197960279927, &quot;Name&quot;: &quot;garry&quot;, &quot;Score&quot;: 1375 },
-  &quot;GamesPlayed&quot;: 341,
-  &quot;TotalSessions&quot;: 3028,
-  &quot;SecondsPlayed&quot;: 548335,
-  &quot;Achievements&quot;: 60,
-  &quot;TotalFavourites&quot;: 68,
-  &quot;TotalReviews&quot;: 33,
-  &quot;NegativeReviews&quot;: 3,
-  &quot;PositiveReviews&quot;: 15,
-  &quot;Avatar&quot;: &quot;{\&quot;Items\&quot;:[...],\&quot;Height\&quot;:0.62,\&quot;DisplayName\&quot;:\&quot;Garry\&quot;}&quot;,
-  &quot;LatestReviews&quot;: [ /* PackageReviewDto[] */ ],
-  &quot;MostPlayed&quot;: { /* PackageWrapMinimal */ },
-  &quot;LatestPlayed&quot;: { /* PackageWrapMinimal */ }
-}
-</code></pre>
-<h3 id="response-fields-playeroverview">Response Fields (<code>PlayerOverview</code>)</h3>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Player</td>
-<td>object</td>
-<td>Basic player profile (same shape as the root endpoint)</td>
-</tr>
-<tr>
-<td>GamesPlayed</td>
-<td>long</td>
-<td>Distinct games the player has launched</td>
-</tr>
-<tr>
-<td>TotalSessions</td>
-<td>long</td>
-<td>Total play sessions across all packages</td>
-</tr>
-<tr>
-<td>SecondsPlayed</td>
-<td>long</td>
-<td>Cumulative time played, in seconds</td>
-</tr>
-<tr>
-<td>Achievements</td>
-<td>long</td>
-<td>Number of achievements unlocked</td>
-</tr>
-<tr>
-<td>TotalFavourites</td>
-<td>long</td>
-<td>Packages this player has favourited</td>
-</tr>
-<tr>
-<td>TotalReviews</td>
-<td>long</td>
-<td>Reviews authored by this player</td>
-</tr>
-<tr>
-<td>NegativeReviews</td>
-<td>long</td>
-<td>Subset of reviews scored as Negative</td>
-</tr>
-<tr>
-<td>PositiveReviews</td>
-<td>long</td>
-<td>Subset of reviews scored as Positive</td>
-</tr>
-<tr>
-<td>Avatar</td>
-<td>string</td>
-<td>JSON-encoded Citizen avatar configuration (clothing items, height, name…) — parse client-side</td>
-</tr>
-<tr>
-<td>LatestReviews</td>
-<td>array</td>
-<td>Most recent reviews by this player (<code>PackageReviewDto[]</code>)</td>
-</tr>
-<tr>
-<td>MostPlayed</td>
-<td>object</td>
-<td>Package with the highest play time (<code>PackageWrapMinimal</code>)</td>
-</tr>
-<tr>
-<td>LatestPlayed</td>
-<td>object</td>
-<td>Most recently played package (<code>PackageWrapMinimal</code>)</td>
-</tr>
-<tr>
-<td>TopPlayed</td>
-<td>array</td>
-<td>Top played packages with <code>SecondsPlayed</code>, <code>AchUnlocked</code>, <code>LastSeen</code></td>
-</tr>
-<tr>
-<td>RecentlyPlayed</td>
-<td>array</td>
-<td>Most recently played packages (same shape as <code>TopPlayed</code>)</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p>The <code>Avatar</code> field is a <strong>string</strong> containing JSON. It encodes the player's Citizen outfit; you must <code>JSON.parse</code> it before reading nested fields.</p>
-</blockquote>
-<hr />
-<h2 id="get-sboxplayersteamidachievementprogress"><code>GET /sbox/player/{steamId}/achievementprogress</code></h2>
-<p>Per-package achievement progress for the player.</p>
-<h3 id="example-response-truncated_1">Example Response (truncated)</h3>
+<h2 id="example-response-global">Example Response (global)</h2>
 <pre><code class="language-json">[
   {
-    &quot;Package&quot;: { /* PackageWrapMinimal */ },
-    &quot;Achievements&quot;: [ /* AchievementDto[] */ ],
-    &quot;LastSeen&quot;: &quot;2026-05-18T19:12:57.7+00:00&quot;,
-    &quot;Unlocked&quot;: 3,
-    &quot;Score&quot;: 80,
-    &quot;Total&quot;: 12,
-    &quot;TotalScore&quot;: 500
+    &quot;Name&quot;: &quot;balls_fired&quot;,
+    &quot;Title&quot;: &quot;balls_fired&quot;,
+    &quot;Description&quot;: &quot;&quot;,
+    &quot;Unit&quot;: &quot;&quot;,
+    &quot;Value&quot;: 1,
+    &quot;ValueString&quot;: &quot;1&quot;,
+    &quot;Players&quot;: 8109,
+    &quot;Max&quot;: 1,
+    &quot;Avg&quot;: 1,
+    &quot;Min&quot;: 1,
+    &quot;Sum&quot;: 8897209
   }
 ]
 </code></pre>
-<h3 id="response-fields-playerachievementprogress">Response Fields (<code>PlayerAchievementProgress</code>)</h3>
+<h2 id="response-fields">Response Fields</h2>
+<h3 id="globalstat"><code>GlobalStat</code></h3>
 <table>
 <thead>
 <tr>
@@ -1776,39 +1436,131 @@
 </thead>
 <tbody>
 <tr>
-<td>Package</td>
-<td>object</td>
-<td>Minimal package wrapper</td>
-</tr>
-<tr>
-<td>Achievements</td>
-<td>array</td>
-<td>Per-achievement entries (see Achievements endpoint)</td>
-</tr>
-<tr>
-<td>LastSeen</td>
+<td>Name</td>
 <td>string</td>
-<td>Last play timestamp for this package (ISO 8601)</td>
+<td>Stat identifier</td>
 </tr>
 <tr>
-<td>Unlocked</td>
-<td>int</td>
-<td>Number of achievements the player has unlocked</td>
+<td>Title</td>
+<td>string</td>
+<td>Display title</td>
 </tr>
 <tr>
-<td>Score</td>
-<td>int</td>
-<td>Sum of <code>Score</code> from unlocked achievements</td>
+<td>Description</td>
+<td>string</td>
+<td>Optional description</td>
 </tr>
 <tr>
-<td>Total</td>
-<td>int</td>
-<td>Total achievements in the package</td>
+<td>Unit</td>
+<td>string</td>
+<td>Unit of measure (e.g. "kills", "seconds")</td>
 </tr>
 <tr>
-<td>TotalScore</td>
+<td>Velocity</td>
+<td>number</td>
+<td>Rate of change indicator</td>
+</tr>
+<tr>
+<td>Value</td>
+<td>number</td>
+<td>Reference value</td>
+</tr>
+<tr>
+<td>ValueString</td>
+<td>string</td>
+<td>Pre-formatted display value</td>
+</tr>
+<tr>
+<td>Players</td>
 <td>int</td>
-<td>Sum of <code>Score</code> across all achievements in the package</td>
+<td>Number of players who contributed to the stat</td>
+</tr>
+<tr>
+<td>Max</td>
+<td>number</td>
+<td>Highest individual value</td>
+</tr>
+<tr>
+<td>Avg</td>
+<td>number</td>
+<td>Mean value</td>
+</tr>
+<tr>
+<td>Min</td>
+<td>number</td>
+<td>Lowest individual value</td>
+</tr>
+<tr>
+<td>Sum</td>
+<td>number</td>
+<td>Sum across all players</td>
+</tr>
+</tbody>
+</table>
+<h3 id="playerstat-per-user-endpoint"><code>PlayerStat</code> (per-user endpoint)</h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name</td>
+<td>string</td>
+<td>Stat identifier</td>
+</tr>
+<tr>
+<td>Title</td>
+<td>string</td>
+<td>Display title</td>
+</tr>
+<tr>
+<td>Description</td>
+<td>string</td>
+<td>Optional description</td>
+</tr>
+<tr>
+<td>Unit</td>
+<td>string</td>
+<td>Unit of measure</td>
+</tr>
+<tr>
+<td>Value</td>
+<td>number</td>
+<td>Player's current value</td>
+</tr>
+<tr>
+<td>ValueString</td>
+<td>string</td>
+<td>Pre-formatted display value</td>
+</tr>
+<tr>
+<td>Max / Min / Avg / Sum</td>
+<td>number</td>
+<td>Per-player aggregates</td>
+</tr>
+<tr>
+<td>First</td>
+<td>string</td>
+<td>Timestamp of the first contribution (ISO 8601)</td>
+</tr>
+<tr>
+<td>FirstValue</td>
+<td>number</td>
+<td>Value at first contribution</td>
+</tr>
+<tr>
+<td>Last</td>
+<td>string</td>
+<td>Timestamp of the most recent contribution (ISO 8601)</td>
+</tr>
+<tr>
+<td>LastValue</td>
+<td>number</td>
+<td>Value at most recent contribution</td>
 </tr>
 </tbody>
 </table>
@@ -1823,11 +1575,11 @@
 <tbody>
 <tr>
 <td>404</td>
-<td>Player not found</td>
+<td>Package or player not found</td>
 </tr>
 <tr>
 <td>400</td>
-<td>Invalid Steam ID format</td>
+<td>Invalid identifier</td>
 </tr>
 <tr>
 <td>429</td>
@@ -1837,10 +1589,9 @@
 </table>
 <h2 id="notes">Notes</h2>
 <ul>
-<li>Steam IDs must be 64-bit (17-digit, prefixed with <code>7656</code>).</li>
-<li>The <code>Url</code> field is a relative path: prepend <code>https://sbox.game</code> to get the full URL.</li>
-<li>The <code>Online</code> and <code>Private</code> fields are omitted from responses when false.</li>
-<li>Use the <code>take</code> parameter on <code>/achievementprogress</code> to limit how many packages are returned (default 10).</li>
+<li>Returns an empty array when the package declares no stats or the user has none recorded.</li>
+<li><code>Velocity</code> is populated for global stats only.</li>
+<li>Stat names are arbitrary strings defined by each package.</li>
 </ul>
 
 
