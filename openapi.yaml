@@ -1,0 +1,889 @@
+openapi: 3.1.0
+info:
+  title: Facepunch S&box API (Unofficial)
+  version: "1.0.0"
+  summary: Unofficial reference for the public Facepunch S&box backend.
+  description: |
+    Unofficial documentation for the public Facepunch S&box backend
+    (`https://services.facepunch.com/sbox`).
+
+    Inferred from public network traffic and from the public client interfaces
+    in [Facepunch/sbox-public/engine/Sandbox.Services/Api](https://github.com/Facepunch/sbox-public/tree/master/engine/Sandbox.Services/Api).
+
+    Endpoints listed here are publicly readable (no auth). Authenticated
+    mutations (uploads, ratings, achievement unlocks, account/login, storage
+    writes, notifications) are not covered.
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  contact:
+    name: smallboxstudio
+    url: https://github.com/smallboxstudio/unofficial-docs-facepunch
+
+servers:
+  - url: https://services.facepunch.com/sbox
+    description: Production
+  - url: https://public.facepunch.com/sbox
+    description: Alternate hostname (same backend)
+
+tags:
+  - name: Search
+    description: Find packages with filters and facets.
+  - name: Packages
+    description: Read package details, versions and reviews.
+  - name: Stats
+    description: Per-package and per-user aggregated stats.
+  - name: Leaderboards
+    description: Stat-backed leaderboards.
+  - name: Achievements
+    description: List achievements declared by a package.
+  - name: Players
+    description: Player profile, overview, achievement progress.
+  - name: News
+    description: Platform / package / organization news feeds.
+  - name: Utility
+    description: Misc helpers (random avatars, …).
+
+paths:
+
+  /package/find/2:
+    get:
+      tags: [Search]
+      summary: Search packages
+      description: |
+        Search for packages (maps, gamemodes, games, assets…) on the S&box
+        platform with filtering, sorting and pagination. The query is a single
+        text string with key prefixes (`type:`, `sort:`, `+tag`, `org:`, …).
+      parameters:
+        - name: q
+          in: query
+          required: true
+          schema: { type: string }
+          example: "type:game sort:trending"
+          description: |
+            Search query. Tokens are space-separated.
+
+            **Supported tokens**
+
+            | Form | Effect |
+            |---|---|
+            | `<text>` | Free text search |
+            | `+<tag>` | Require tag |
+            | `type:<type>` | Filter by package type (`game`, `map`, `gamemode`, …) |
+            | `sort:<order>` | Sort mode (see below) |
+            | `org:<ident>` | Restrict to organization |
+            | `asset:<name>` | Filter by primary asset type |
+            | `contest:<name>` | Restrict to a contest |
+            | `in:<collection>` | Restrict to a collection |
+            | `target:<pkg>` | Built for a target package |
+            | `+game:<pkg>` | Created for this game (`any` to clear) |
+            | `is:unplayed` | Hide packages already played (auth) |
+            | `is:fave` | Restrict to favourites (auth) |
+
+            **`sort:` values**: `trending`, `popular`, `newest`, `oldest`,
+            `updated`, `friends`, `random`, `upvotes`, `downvotes`, `favcount`,
+            `live`/`used`/`played`, `rankd`/`rankw`/`rankm`, `spawns`,
+            `spawnsday`/`spawnsweek`/`spawnsmonth`, `playersnow`, `bestrated`,
+            `mostreviewed`, `quality`, `hiddengem`.
+        - name: take
+          in: query
+          schema: { type: integer, default: 100, minimum: 1, maximum: 200 }
+        - name: skip
+          in: query
+          schema: { type: integer, default: 0, minimum: 0 }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/PackageFindResult' }
+
+  /package/get/2/{packageIdent}:
+    get:
+      tags: [Packages]
+      summary: Get package details
+      parameters:
+        - $ref: '#/components/parameters/PackageIdent'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/PackageDto' }
+        "404": { $ref: '#/components/responses/NotFound' }
+
+  /package/versions/2/{packageIdent}:
+    get:
+      tags: [Packages]
+      summary: List published versions
+      description: Returns the version history, newest first.
+      parameters:
+        - $ref: '#/components/parameters/PackageIdent'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/PackageVersion' }
+        "404": { $ref: '#/components/responses/NotFound' }
+
+  /package/reviews/{packageIdent}:
+    get:
+      tags: [Packages]
+      summary: List package reviews
+      parameters:
+        - $ref: '#/components/parameters/PackageIdent'
+        - name: skip
+          in: query
+          required: true
+          schema: { type: integer, default: 0, minimum: 0 }
+        - name: take
+          in: query
+          required: true
+          schema: { type: integer, default: 10, minimum: 1, maximum: 100 }
+        - name: score
+          in: query
+          schema:
+            type: integer
+            enum: [0, 1, 2, 3]
+            default: 0
+          description: "0 = all, 1 = Negative, 2 = Positive, 3 = Promise"
+        - name: positives
+          in: query
+          schema: { type: integer, default: 0 }
+          description: Bitmask filter — see ReviewPositiveTags
+        - name: negatives
+          in: query
+          schema: { type: integer, default: 0 }
+          description: Bitmask filter — see ReviewNegativeTags
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/PackageReviewList' }
+        "404": { $ref: '#/components/responses/NotFound' }
+
+  /package/reviews/{packageIdent}/{steamId}:
+    get:
+      tags: [Packages]
+      summary: Get a single review by user
+      parameters:
+        - $ref: '#/components/parameters/PackageIdent'
+        - $ref: '#/components/parameters/SteamId'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/PackageReviewDto' }
+        "404":
+          description: User has not reviewed this package
+
+  /package/stats/2/{packageIdent}:
+    get:
+      tags: [Stats]
+      summary: Global package stats
+      parameters:
+        - $ref: '#/components/parameters/PackageIdent'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/GlobalStat' }
+
+  /package/stats/2/{packageIdent}/u/{steamId}:
+    get:
+      tags: [Stats]
+      summary: Per-user package stats
+      parameters:
+        - $ref: '#/components/parameters/PackageIdent'
+        - $ref: '#/components/parameters/SteamId'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/PlayerStat' }
+
+  /package/leaderboard/2/:
+    get:
+      tags: [Leaderboards]
+      summary: Query a leaderboard (v2)
+      parameters:
+        - name: ident
+          in: query
+          required: true
+          schema: { type: string }
+          example: facepunch.testbed
+          description: Full package identifier
+        - name: Stat
+          in: query
+          required: true
+          schema: { type: string }
+          example: balls_fired
+        - name: Aggregation
+          in: query
+          schema:
+            type: string
+            enum: [Sum, Max, Min, Last, Avg]
+        - name: SortOrder
+          in: query
+          schema: { type: string, enum: [Desc, Asc], default: Desc }
+        - name: DateFilter
+          in: query
+          schema: { type: string, enum: [None, Year, Month, Week, Day] }
+        - name: Date
+          in: query
+          schema: { type: string, format: date-time }
+        - name: CenterSteamId
+          in: query
+          schema: { type: integer, format: int64 }
+        - name: Offset
+          in: query
+          schema: { type: integer, format: int64, default: 0 }
+        - name: Country
+          in: query
+          schema: { type: string }
+        - name: Count
+          in: query
+          schema: { type: integer, default: 50 }
+        - name: SteamId
+          in: query
+          schema: { type: integer, format: int64 }
+        - name: Friends
+          in: query
+          schema: { type: boolean }
+        - name: Include
+          in: query
+          schema: { type: string }
+          description: Comma-separated Steam IDs to always include
+        - name: IncludeQuery
+          in: query
+          schema: { type: boolean }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/LeaderboardResponseEx' }
+
+  /package/leaderboard/1/{package}/{leaderboard}/u/{steamId}/{mode}:
+    get:
+      tags: [Leaderboards]
+      summary: Query a leaderboard (legacy v1)
+      parameters:
+        - in: path
+          name: package
+          required: true
+          schema: { type: string }
+        - in: path
+          name: leaderboard
+          required: true
+          schema: { type: string }
+        - $ref: '#/components/parameters/SteamId'
+        - in: path
+          name: mode
+          required: true
+          schema: { type: string, example: Global }
+        - name: take
+          in: query
+          schema: { type: integer, default: 20 }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/LeaderboardResponseLegacy' }
+
+  /achievement/list:
+    get:
+      tags: [Achievements]
+      summary: List achievements declared by a package
+      parameters:
+        - name: package
+          in: query
+          required: true
+          schema: { type: string }
+          example: facepunch.testbed
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/AchievementDto' }
+
+  /player/{steamId}:
+    get:
+      tags: [Players]
+      summary: Get player profile
+      parameters:
+        - $ref: '#/components/parameters/SteamId'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Player' }
+        "404": { $ref: '#/components/responses/NotFound' }
+
+  /player/{steamId}/overview:
+    get:
+      tags: [Players]
+      summary: Aggregated player overview
+      parameters:
+        - $ref: '#/components/parameters/SteamId'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/PlayerOverview' }
+        "404": { $ref: '#/components/responses/NotFound' }
+
+  /player/{steamId}/achievementprogress:
+    get:
+      tags: [Players]
+      summary: Per-package achievement progress for a player
+      parameters:
+        - $ref: '#/components/parameters/SteamId'
+        - name: take
+          in: query
+          schema: { type: integer, default: 10 }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/PlayerAchievementProgress' }
+
+  /news:
+    get:
+      tags: [News]
+      summary: Combined news feed
+      parameters:
+        - { name: take, in: query, schema: { type: integer, default: 10 } }
+        - { name: skip, in: query, schema: { type: integer, default: 0 } }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/NewsPostDto' }
+
+  /news/platform:
+    get:
+      tags: [News]
+      summary: Platform-wide news
+      parameters:
+        - { name: take, in: query, schema: { type: integer, default: 10 } }
+        - { name: skip, in: query, schema: { type: integer, default: 0 } }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/NewsPostDto' }
+
+  /news/package/{packageIdent}:
+    get:
+      tags: [News]
+      summary: News for a specific package
+      parameters:
+        - $ref: '#/components/parameters/PackageIdent'
+        - { name: take, in: query, schema: { type: integer, default: 10 } }
+        - { name: skip, in: query, schema: { type: integer, default: 0 } }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/NewsPostDto' }
+
+  /news/organization/{orgIdent}:
+    get:
+      tags: [News]
+      summary: News for an organization
+      parameters:
+        - name: orgIdent
+          in: path
+          required: true
+          schema: { type: string }
+          example: smallboxstudio
+        - { name: take, in: query, schema: { type: integer, default: 10 } }
+        - { name: skip, in: query, schema: { type: integer, default: 0 } }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/NewsPostDto' }
+
+  /utility/avatars:
+    get:
+      tags: [Utility]
+      summary: Random Citizen avatar configurations
+      description: |
+        Returns an array of JSON-encoded **strings**. Each element must be
+        parsed separately (it is not an object).
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { type: string }
+
+components:
+
+  parameters:
+    PackageIdent:
+      name: packageIdent
+      in: path
+      required: true
+      schema: { type: string }
+      example: facepunch.testbed
+      description: Full package identifier (`org.package`)
+    SteamId:
+      name: steamId
+      in: path
+      required: true
+      schema: { type: integer, format: int64 }
+      example: 76561197960279927
+      description: Steam ID (64-bit, 17-digit format starting with `7656`)
+
+  responses:
+    NotFound:
+      description: Not found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              Detail: { type: string }
+              Summary: { type: string }
+
+  schemas:
+
+    OrganizationDto:
+      type: object
+      properties:
+        Ident: { type: string }
+        Title: { type: string }
+        Description: { type: string }
+        Thumb: { type: string }
+        Twitter: { type: string }
+        WebUrl: { type: string }
+        Discord: { type: string }
+
+    Player:
+      type: object
+      properties:
+        Id: { type: integer, format: int64 }
+        Name: { type: string }
+        Url: { type: string }
+        Avatar: { type: string }
+        Online: { type: boolean }
+        Private: { type: boolean }
+        Score: { type: integer }
+
+    PlayerOverview:
+      type: object
+      properties:
+        Player: { $ref: '#/components/schemas/Player' }
+        GamesPlayed: { type: integer, format: int64 }
+        TotalSessions: { type: integer, format: int64 }
+        SecondsPlayed: { type: integer, format: int64 }
+        Achievements: { type: integer, format: int64 }
+        TotalFavourites: { type: integer, format: int64 }
+        TotalReviews: { type: integer, format: int64 }
+        NegativeReviews: { type: integer, format: int64 }
+        PositiveReviews: { type: integer, format: int64 }
+        Avatar:
+          type: string
+          description: JSON-encoded Citizen avatar configuration — parse client-side
+        LatestReviews:
+          type: array
+          items: { $ref: '#/components/schemas/PackageReviewDto' }
+        MostPlayed: { $ref: '#/components/schemas/PackageWrapMinimal' }
+        LatestPlayed: { $ref: '#/components/schemas/PackageWrapMinimal' }
+        TopPlayed:
+          type: array
+          items:
+            type: object
+            properties:
+              Package: { $ref: '#/components/schemas/PackageWrapMinimal' }
+              SecondsPlayed: { type: integer, format: int64 }
+              AchUnlocked: { type: integer }
+              LastSeen: { type: string, format: date-time }
+        RecentlyPlayed:
+          type: array
+          items:
+            type: object
+            properties:
+              Package: { $ref: '#/components/schemas/PackageWrapMinimal' }
+              SecondsPlayed: { type: integer, format: int64 }
+              AchUnlocked: { type: integer }
+              LastSeen: { type: string, format: date-time }
+
+    PackageUsageStatsGroup:
+      type: object
+      properties:
+        Users: { type: integer, format: int64 }
+        Seconds: { type: integer, format: int64 }
+        Sessions: { type: integer, format: int64 }
+
+    PackageUsageStats:
+      type: object
+      properties:
+        Total: { $ref: '#/components/schemas/PackageUsageStatsGroup' }
+        UsersNow:
+          type: integer
+          format: int64
+          deprecated: true
+          description: Deprecated — moved to root `UsersNow` on PackageDto / PackageWrapMinimal
+
+    PackageReviewStats:
+      type: object
+      properties:
+        p:
+          type: integer
+          description: PositiveRatings
+        n:
+          type: integer
+          description: NegativeRatings
+        o:
+          type: integer
+          description: PromiseRatings
+        pti:
+          type: object
+          description: "PositiveTags histogram (`{ <tag-id>: count }`)"
+          additionalProperties: { type: integer }
+        nti:
+          type: object
+          description: "NegativeTags histogram (`{ <tag-id>: count }`)"
+          additionalProperties: { type: integer }
+
+    PackageVersion:
+      type: object
+      properties:
+        Id: { type: integer, format: int64 }
+        Changes: { type: string }
+        FileCount: { type: integer, format: int64 }
+        TotalSize: { type: integer, format: int64 }
+        Hash: { type: integer, format: int64 }
+        ManifestUrl: { type: string }
+        Created: { type: string, format: date-time }
+        EngineVersion: { type: integer }
+        Meta:
+          type: string
+          description: JSON-encoded metadata blob (game type, player counts, map list, …)
+        AssetVersionId:
+          type: integer
+          format: int64
+          deprecated: true
+          description: Legacy alias of `Id`
+
+    Screenshot:
+      type: object
+      properties:
+        Created: { type: string, format: date-time }
+        Width: { type: integer }
+        Height: { type: integer }
+        Url: { type: string }
+        Thumb: { type: string }
+
+    PackageWrapMinimal:
+      type: object
+      properties:
+        Org: { $ref: '#/components/schemas/OrganizationDto' }
+        Ident: { type: string }
+        FullIdent: { type: string }
+        Title: { type: string }
+        Summary: { type: string }
+        Thumb: { type: string }
+        ThumbWide: { type: string }
+        ThumbTall: { type: string }
+        VideoThumb: { type: string }
+        TypeName: { type: string }
+        Updated: { type: string, format: date-time }
+        Created: { type: string, format: date-time }
+        Archived: { type: boolean }
+        UsageStats: { $ref: '#/components/schemas/PackageUsageStats' }
+        UsersNow: { type: integer, format: int64 }
+        Tags:
+          type: array
+          items: { type: string }
+        Favourited: { type: integer }
+        Collections: { type: integer }
+        Referencing: { type: integer }
+        Referenced: { type: integer }
+        VotesUp: { type: integer }
+        VotesDown: { type: integer }
+        Public: { type: boolean }
+        Mature: { type: boolean }
+        Spawns: { type: integer, format: int64 }
+        PlayerSpawns: { type: integer, format: int64 }
+        FileSize: { type: integer, format: int64 }
+        ModTag: { type: string }
+
+    PackageDto:
+      allOf:
+        - $ref: '#/components/schemas/PackageWrapMinimal'
+        - type: object
+          properties:
+            Description: { type: string, description: HTML content }
+            ReviewStats: { $ref: '#/components/schemas/PackageReviewStats' }
+            Version: { $ref: '#/components/schemas/PackageVersion' }
+            Screenshots:
+              type: array
+              items: { $ref: '#/components/schemas/Screenshot' }
+            PackageReferences:
+              type: array
+              items: { type: string }
+            EditorReferences:
+              type: array
+              items: { type: string }
+            ApiVersion: { type: integer }
+            ErrorRate: { type: number, format: float }
+            LatestNews: { $ref: '#/components/schemas/NewsPostDto' }
+
+    PackageFindResult:
+      type: object
+      properties:
+        Packages:
+          type: array
+          items: { $ref: '#/components/schemas/PackageWrapMinimal' }
+        TotalCount: { type: integer, format: int64 }
+        Facets:
+          type: array
+          items: { $ref: '#/components/schemas/PackageFacet' }
+        Tags:
+          type: object
+          additionalProperties: { type: integer }
+        Orders:
+          type: array
+          items: { type: string }
+        Properties:
+          type: array
+          items: { type: object }
+
+    PackageFacet:
+      type: object
+      properties:
+        Name: { type: string }
+        Title: { type: string }
+        Entries:
+          type: array
+          items: { $ref: '#/components/schemas/PackageFacetEntry' }
+
+    PackageFacetEntry:
+      type: object
+      properties:
+        Name: { type: string }
+        Title: { type: string }
+        Icon: { type: string }
+        Count: { type: integer }
+        Children:
+          type: array
+          items: { $ref: '#/components/schemas/PackageFacetEntry' }
+
+    PackageReviewList:
+      type: object
+      properties:
+        Count: { type: integer }
+        Skip: { type: integer }
+        Take: { type: integer }
+        Entries:
+          type: array
+          items: { $ref: '#/components/schemas/PackageReviewDto' }
+
+    PackageReviewDto:
+      type: object
+      properties:
+        Player: { $ref: '#/components/schemas/Player' }
+        SteamId: { type: integer, format: int64 }
+        PackageId: { type: integer, format: int64 }
+        Content: { type: string }
+        Score:
+          type: integer
+          enum: [1, 2, 3]
+          description: "ReviewScore: 1 = Negative, 2 = Positive, 3 = Promise"
+        Package: { $ref: '#/components/schemas/PackageWrapMinimal' }
+        SecondsPlayed: { type: integer }
+        Created: { type: string, format: date-time }
+        Updated: { type: string, format: date-time }
+        Positives:
+          type: integer
+          description: |
+            Bitmask of ReviewPositiveTags —
+            1=Graphics, 2=Audio, 4=Gameplay, 8=Story, 16=Multiplayer,
+            32=Originality, 64=Performance, 128=Polish, 256=Addictive,
+            512=Replayability, 1024=Controls, 2048=Updates
+        Negatives:
+          type: integer
+          description: |
+            Bitmask of ReviewNegativeTags —
+            2=Unfinished, 4=Unoptimized, 8=BadControls, 16=Confusing, 32=Slop,
+            64=GeneratedArt, 128=PayToWin, 256=Stolen, 512=Errors,
+            1024=LoadTimes, 2048=Buggy, 4096=Clicker, 8192=Idle
+
+    GlobalStat:
+      type: object
+      properties:
+        Name: { type: string }
+        Title: { type: string }
+        Description: { type: string }
+        Unit: { type: string }
+        Velocity: { type: number }
+        Value: { type: number }
+        ValueString: { type: string }
+        Players: { type: integer }
+        Max: { type: number }
+        Avg: { type: number }
+        Min: { type: number }
+        Sum: { type: number }
+
+    PlayerStat:
+      type: object
+      properties:
+        Name: { type: string }
+        Title: { type: string }
+        Description: { type: string }
+        Unit: { type: string }
+        Value: { type: number }
+        ValueString: { type: string }
+        Max: { type: number }
+        Avg: { type: number }
+        Min: { type: number }
+        Sum: { type: number }
+        First: { type: string, format: date-time }
+        FirstValue: { type: number }
+        Last: { type: string, format: date-time }
+        LastValue: { type: number }
+
+    LeaderboardResponseEx:
+      type: object
+      properties:
+        Stat: { type: string }
+        TotalEntries: { type: integer, format: int64 }
+        Entries:
+          type: array
+          items:
+            type: object
+            properties:
+              Rank: { type: integer, format: int64 }
+              Value: { type: number }
+              SteamId: { type: integer, format: int64 }
+              CountryCode: { type: string }
+              DisplayName: { type: string }
+              Timestamp: { type: string, format: date-time }
+              DataUrl: { type: string }
+        Query: { type: string }
+        DateDescription: { type: string }
+
+    LeaderboardResponseLegacy:
+      type: object
+      properties:
+        Title: { type: string }
+        DisplayName: { type: string }
+        Description: { type: string }
+        Unit: { type: string }
+        TotalEntries: { type: integer, format: int64 }
+        Entries:
+          type: array
+          items:
+            type: object
+            properties:
+              Me: { type: boolean }
+              Rank: { type: integer, format: int64 }
+              Value: { type: number }
+              ValueString: { type: string }
+              SteamId: { type: integer, format: int64 }
+              CountryCode: { type: string }
+              DisplayName: { type: string }
+
+    AchievementDto:
+      type: object
+      properties:
+        Name: { type: string }
+        Title: { type: string }
+        Description: { type: string }
+        Icon: { type: string }
+        Visibility:
+          type: integer
+          enum: [0, 1, 2]
+          description: "0 = Visible, 1 = VisibleWhenUnlocked, 2 = Hidden"
+        SourceStat: { type: string }
+        SourceAggregation:
+          type: string
+          enum: [Sum, Max, Min, Last, Avg]
+        Min: { type: number }
+        Max: { type: number }
+        ShowProgress: { type: boolean }
+        UnlockMode:
+          type: integer
+          enum: [0, 1]
+          description: "0 = Manual, 1 = Stat"
+        Score: { type: integer }
+        GlobalUnlocks: { type: integer }
+        GlobalFraction: { type: number }
+        Unlocked: { type: string, format: date-time }
+
+    PlayerAchievementProgress:
+      type: object
+      properties:
+        Package: { $ref: '#/components/schemas/PackageWrapMinimal' }
+        Achievements:
+          type: array
+          items: { $ref: '#/components/schemas/AchievementDto' }
+        LastSeen: { type: string, format: date-time }
+        Unlocked: { type: integer }
+        Score: { type: integer }
+        Total: { type: integer }
+        TotalScore: { type: integer }
+
+    NewsPostDto:
+      type: object
+      properties:
+        Id: { type: string, format: uuid }
+        Created: { type: string, format: date-time }
+        Title: { type: string }
+        Summary: { type: string }
+        Url: { type: string }
+        Author: { $ref: '#/components/schemas/Player' }
+        Package: { type: string }
+        Media: { type: string }
+        Sections:
+          type: array
+          items: { $ref: '#/components/schemas/NewsSectionDto' }
+
+    NewsSectionDto:
+      type: object
+      properties:
+        Id: { type: string, format: uuid }
+        Title: { type: string }
+        Author: { $ref: '#/components/schemas/Player' }
+        SortOrder: { type: integer }
+        Contents: { type: string, description: HTML content (Trix editor) }
+        Slug: { type: string }
