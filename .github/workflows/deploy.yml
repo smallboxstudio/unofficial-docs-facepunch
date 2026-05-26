@@ -14,21 +14,15 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.x"
-
-      - name: Install dependencies
-        run: pip install mkdocs mkdocs-material
-
-      - name: Configure git
+      - name: Stage publish dir
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          mkdir _publish
+          cp index.html openapi.yaml _publish/
 
-      - name: Build and deploy
-        run: mkdocs gh-deploy --force
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./_publish
+          publish_branch: gh-pages
